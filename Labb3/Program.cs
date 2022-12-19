@@ -29,9 +29,8 @@ namespace Labb3
 
             //5: Hämta en lista med alla kurser och det snittbetyg som eleverna fått på den kursen samt det högsta och lägsta beyget som någon fått i kursen med SQL - klar
             /* SELECT Subject.SubjectName, AVG(StudentGrade.FK_GradeId) AS 'GPA', MIN(StudentGrade.FK_GradeId) AS 'LOWEST GRADE',
-             * MAX(StudentGrade.FK_GradeId) AS 'HIGHEST GRADE'
-             * FROM StudentGrade 
-             * INNER JOIN Subject ON Subject.PK_SubjectId =StudentGrade.FK_SubjectId
+             * MAX(StudentGrade.FK_GradeId) AS 'HIGHEST GRADE'FROM StudentGrade
+             * FULL OUTER JOIN Subject ON Subject.PK_SubjectId =StudentGrade.FK_SubjectId
              * GROUP BY SubjectName*/
 
 
