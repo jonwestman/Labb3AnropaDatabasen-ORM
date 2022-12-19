@@ -48,8 +48,9 @@ namespace Labb3.MethodHandling
                 switch (approvedMenuInput)
                 {
                     case 1:
-                        Console.WriteLine("Get all Faculty members");
-                        GetFaculty();
+                        Console.WriteLine("Get all Faculty members press 1:\nGet all from a specific department press 2: ");
+                        int choiceOfFaculty = int.Parse(Console.ReadLine());
+                        GetFaculty(choiceOfFaculty);
                         break;
                     case 2:
                         Console.WriteLine("2: Get all students enrolled in NewSchool: ");
@@ -110,23 +111,53 @@ namespace Labb3.MethodHandling
 
             } while (theEnd.ToLower() != "q");
         }
-        public static void GetFaculty()
+        public static void GetFaculty(int input)
         {
-            using (var context = new NewSchoolContext())
+            if (input == 1)
             {
-                var myFaculty = from f in context.Faculties
-                                select f;
-
-                Console.Clear();
-
-                foreach (var faculty in myFaculty)
+                using (var context = new NewSchoolContext())
                 {
-                    Console.WriteLine($"{faculty.Fname} {faculty.Lname}");
-                    Console.WriteLine(new string('-', (30)));
+                    var myFaculty = from f in context.Faculties
+                                    select f;
+
+                    Console.Clear();
+
+                    foreach (var faculty in myFaculty)
+                    {
+                        Console.WriteLine($"{faculty.Fname} {faculty.Lname}");
+                        Console.WriteLine(new string('-', (30)));
+
+                    }
 
                 }
-
             }
+            else if (input == 2)
+            {
+                using (var context = new NewSchoolContext())
+                {
+                    var faculty = new Faculty();
+
+                    int facultyInput;
+
+                    Console.WriteLine("1: Headmaster\n2: Administrator\n3: Creepy Janitor\n4: Lunchlady\n5: Guidens Councelor\n6: Teacher");
+                    Console.Write("Assign type of faculty[1-6]: ");
+                    facultyInput = int.Parse(Console.ReadLine());
+
+                    var myFaculty = from f in context.Faculties
+                                    where  faculty.FkFacultyTypeId == facultyInput
+                                    select f;
+
+                    Console.Clear();
+
+                    foreach (var f in myFaculty)
+                    {
+                        Console.WriteLine($"{f.Fname} {f.Lname} {f.FkFacultyTypeId}");
+                        Console.WriteLine(new string('-', (30)));
+
+                    }
+                }
+            }
+            
         }
         public static void GetStudents()
         {
@@ -136,30 +167,95 @@ namespace Labb3.MethodHandling
 
             string sortByName = "";
 
-            if (input == 1)
-            {
-                sortByName = "FName";
-            }
-            else if (input == 2)
-            {
-                sortByName = "LName";
-            }
-
             Console.WriteLine("Sort by 'Ascending' or 'Descending' [1-2]: ");
             int ascOrDesc = int.Parse(Console.ReadLine());
 
             string upOrDown = "";
 
-            if (ascOrDesc == 1)
+            if (input == 1)
             {
-                upOrDown = "ASC";
+                if (ascOrDesc == 1)
+                {
+                    using (var context = new NewSchoolContext())
+                    {
+                        var myStudents = from s in context.Students
+                                         orderby s.Fname ascending
+                                         select s;
+
+                        Console.Clear();
+
+                        foreach (var student in myStudents)
+                        {
+                            Console.WriteLine($"{student.Fname} {student.Lname} {student.PersonId}");
+                            Console.WriteLine(new string('-', (30)));
+
+                        }
+
+                    }
+                }
+                else if (ascOrDesc == 2)
+                {
+                    using (var context = new NewSchoolContext())
+                    {
+                        var myStudents = from s in context.Students
+                                         orderby s.Fname descending
+                                         select s;
+
+                        Console.Clear();
+
+                        foreach (var student in myStudents)
+                        {
+                            Console.WriteLine($"{student.Fname} {student.Lname} {student.PersonId}");
+                            Console.WriteLine(new string('-', (30)));
+
+                        }
+
+                    }
+                }
             }
-            else if (ascOrDesc == 2)
+            else if (input == 2)
             {
-                upOrDown = "DESC";
+                if (ascOrDesc == 1)
+                {
+                    using (var context = new NewSchoolContext())
+                    {
+                        var myStudents = from s in context.Students
+                                         orderby s.Lname ascending
+                                         select s;
+
+                        Console.Clear();
+
+                        foreach (var student in myStudents)
+                        {
+                            Console.WriteLine($"{student.Fname} {student.Lname} {student.PersonId}");
+                            Console.WriteLine(new string('-', (30)));
+
+                        }
+
+                    }
+                }
+                else if (ascOrDesc == 2)
+                {
+                    using (var context = new NewSchoolContext())
+                    {
+                        var myStudents = from s in context.Students
+                                         orderby s.Lname descending
+                                         select s;
+
+                        Console.Clear();
+
+                        foreach (var student in myStudents)
+                        {
+                            Console.WriteLine($"{student.Fname} {student.Lname} {student.PersonId}");
+                            Console.WriteLine(new string('-', (30)));
+
+                        }
+
+                    }
+                }
             }
 
-
+            
             using (var context = new NewSchoolContext())
             {
                 var myStudents = from s in context.Students
@@ -176,6 +272,9 @@ namespace Labb3.MethodHandling
                 }
 
             }
+
+
+
         }
 
         public static void ChooseStudentClass()
