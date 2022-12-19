@@ -246,7 +246,7 @@ namespace Labb3.MethodHandling
 
                         foreach (var student in myStudents)
                         {
-                            Console.WriteLine($"{student.Fname} {student.Lname} {student.PersonId}");
+                            Console.WriteLine($"{student.Lname} {student.Fname} {student.PersonId}");
                             Console.WriteLine(new string('-', (30)));
 
                         }
@@ -254,27 +254,6 @@ namespace Labb3.MethodHandling
                     }
                 }
             }
-
-            
-            using (var context = new NewSchoolContext())
-            {
-                var myStudents = from s in context.Students
-                                 orderby s.Lname descending
-                                 select s;
-
-                Console.Clear();
-
-                foreach (var student in myStudents)
-                {
-                    Console.WriteLine($"{student.Fname} {student.Lname} {student.PersonId}");
-                    Console.WriteLine(new string('-', (30)));
-
-                }
-
-            }
-
-
-
         }
 
         public static void ChooseStudentClass()
