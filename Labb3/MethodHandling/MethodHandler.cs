@@ -61,8 +61,9 @@ namespace Labb3.MethodHandling
                         ChooseStudentClass();
                         break;
                     case 4:
-                        Console.WriteLine("4: Get all the grades from the last month: ");
-                        GetGrades();
+                        Console.WriteLine("4: Get all the grades from the last month: ");/*[yyyy-mm-dd]*/
+                        //string dateEntered = Console.ReadLine();
+                        GetGrades(/*dateEntered*/);
                         break;
                     case 5:
                         Console.WriteLine("5: Get a list of all the courses with average GPA: ");
@@ -280,7 +281,7 @@ namespace Labb3.MethodHandling
 
             }
         }
-        public static void GetGrades()
+        public static void GetGrades(/*string dateEntered*/)
         {
             using (var context = new NewSchoolContext())
             {
