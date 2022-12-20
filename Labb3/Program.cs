@@ -8,13 +8,13 @@ namespace Labb3
         {
             MethodHandler.Menu();
 
-            //1: Hämta Personal med SQL 
+            //1: Hämta Personal med SQL -klar
             /*SELECT * FROM Faculty
             JOIN FacultyType ON FK_FacultyTypeId = PK_FacultyTypeId
             WHERE FacultyType = 'Teacher'*/
 
 
-            //2: Hämta alla elever - löses med Entity Framework
+            //2: Hämta alla elever - löses med Entity Framework - klar
 
             //3: Hämta alla elever i en viss klass - löses med Entity Framework - klar
 
