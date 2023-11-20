@@ -29,7 +29,7 @@ namespace Labb3.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=LAPTOP-3V4DD649\\SQLEXPRESS; Initial Catalog=NewSchool;Integrated Security=true");
+                optionsBuilder.UseSqlServer("YOUR_CONNECTION_STRING");
             }
         }
 
